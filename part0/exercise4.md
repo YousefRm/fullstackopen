@@ -7,7 +7,7 @@ user ->> browser: user writes a text and click the send button
 browser ->> server: make a http rquest to send user data to the server 
 activate server
 server --> browser: recieve browser request then redirect it to make a new get request to the url in the request header
-server deactivate 
+deactivate server 
 browser ->> server: make a get http request to the url recieved from server 
 activate server 
 server --> browser: send the document in the url to the browser 
