@@ -21,7 +21,7 @@ activate server
 server --> browser: send js file
 deactivate server
 Note right of browser: the browser starts to excute js file that make a get request to the json file 
-browser ->> get the data from json file to present it in the page 
+browser ->> server: get the data from json file to present it in the page 
 activate server 
 server --> browser: send data from json file 
 deactivate server 
