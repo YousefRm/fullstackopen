@@ -18,7 +18,8 @@ server --> browser: send css file to the browser
 deactivate server 
 browser ->> server: get js file 
 activate server 
-server --> browser: send js file 
+server --> browser: send js file
+deactivate server
 Note right of browser: the browser starts to excute js file that make a get request to the json file 
 browser ->> get the data from json file to present it in the page 
 activate server 
