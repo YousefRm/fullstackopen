@@ -23,18 +23,20 @@ if (procLength === 3) {
       console.log(person.name + ' ' + person.phone)
     })
     mongoose.connection.close()
+
+  })
+} else {
+
+  const name = process.argv[3]
+  const phone = process.argv[4]
+
+  const person = new Person({
+    name: name,
+    phone: phone,
+  })
+
+  person.save().then(request => {
+    console.log(`added ${name} number ${phone} to phonebook `)
+    mongoose.connection.close()
   })
 }
-
-const name = process.argv[3]
-const phone = process.argv[4]
-
-const person = new Person({
-  name: name,
-  phone: phone,
-})
-
-person.save().then(request => {
-  console.log(`added ${name} number ${phone} to phonebook `)
-  mongoose.connection.close()
-})
