@@ -26,10 +26,22 @@ app.get('/info', (request, response) => {
 })
 app.get('/api/persons/:id', (request, response) => {
   const id = request.params.id
-
+  Person.findById(id).then(person => {
+    if (person) {
+      response.json(person)
+    } else {
+      response.status(404).end()
+    }
+  }).catch(error => {
+    console.log(error)
+    response.status(400).send({ error: 'malformated id' })
+  })
 })
 app.delete('/api/persons/:id', (request, response) => {
   const id = request.params.id
+  Person.findByIdAndDelete(id).then(result => {
+    response.status(204).end()
+  })
 
 })
 app.post('/api/persons', (request, response) => {
