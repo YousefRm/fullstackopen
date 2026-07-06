@@ -1,4 +1,6 @@
+require('dotenv').config()
 const express = require('express')
+const Person = require('./models/person')
 const morgan = require('morgan')
 const app = express()
 app.use(express.json())
@@ -41,7 +43,9 @@ const generateId = () => {
 
 }
 app.get('/api/persons', (request, response) => {
-  response.json(persons)
+  Person.find({}).then(persons => {
+    response.json(persons)
+  })
 })
 app.get('/info', (request, response) => {
   response.send(`<p>Phonebook has info for ${persons.length} people </p><p>${Date()}</p>`)
