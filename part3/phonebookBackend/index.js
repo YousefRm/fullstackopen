@@ -22,9 +22,10 @@ app.get('/api/persons', (request, response) => {
   })
 })
 app.get('/info', (request, response) => {
-  response.send(`<p>Phonebook has info for  people </p><p>${Date()}</p>`)
+  Person.find({}).then(persons => response.send(`<p>Phonebook has info for ${persons.length} people </p><p>${Date()}</p>`))
+
 })
-app.get('/api/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response, next) => {
   const id = request.params.id
   Person.findById(id).then(person => {
     if (person) {
@@ -32,10 +33,7 @@ app.get('/api/persons/:id', (request, response) => {
     } else {
       response.status(404).end()
     }
-  }).catch(error => {
-    console.log(error)
-    response.status(400).send({ error: 'malformated id' })
-  })
+  }).catch(error => next(error))
 })
 app.delete('/api/persons/:id', (request, response) => {
   const id = request.params.id
