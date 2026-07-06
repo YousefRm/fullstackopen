@@ -58,6 +58,16 @@ app.post('/api/persons', (request, response) => {
   })
 
 })
+app.put('/api/persons/:id', (request, response, next) => {
+  const phone = request.body.phone
+  Person.findById(request.params.id).then(person => {
+    if (!person) { response.status(404).end() }
+    person.phone = phone
+    return person.save().then(updatedPerson => {
+      response.json(updatedPerson)
+    })
+  }).catch(error => next(error))
+})
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)
   if (error.name === 'CastError') {
