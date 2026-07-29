@@ -51,6 +51,9 @@ const App = () => {
       setNewPerson(emptyPerson)
       setMsg({ name: `Added ${returnedPerson.name}`, type: 'succes' })
       removeNotification()
+    }).catch(error => {
+      setMsg({ name: `${error.response.data.error}`, type: 'error' })
+      removeNotification()
     })
   }
   //bind user input to the new pserson value 
