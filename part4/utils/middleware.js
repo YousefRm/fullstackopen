@@ -1,5 +1,5 @@
 const logger = require('./logger')
-const requiestLogger = (request, response, next) => {
+const requestLogger = (request, response, next) => {
   logger.info('Method')
   logger.info('Path')
   logger.info('Body')
@@ -10,3 +10,6 @@ const unknownEndpoit = (request, response) => {
   response.status(404).send({ error: 'unknownEndpoit' })
 }
 
+module.exports = {
+  requestLogger,
+}
